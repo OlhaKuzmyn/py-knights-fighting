@@ -9,7 +9,7 @@ class Knight:
             hp: int,
             armour: list[dict],
             weapon: dict,
-            potion: dict
+            potion: dict | None
     ) -> None:
         self.name = name
         self.power = power
@@ -22,12 +22,7 @@ class Knight:
     @classmethod
     def new_knight(cls, knight_dict: dict) -> Knight:
         return cls(
-            name=knight_dict["name"],
-            power=knight_dict["power"],
-            hp=knight_dict["hp"],
-            armour=knight_dict["armour"],
-            weapon=knight_dict["weapon"],
-            potion=knight_dict["potion"]
+            **knight_dict
         )
 
     def apply_armour(self) -> None:
@@ -39,9 +34,10 @@ class Knight:
 
     def apply_potion(self) -> None:
         if self.potion is not None:
-            self.hp += self.potion.get("effect").get("hp", 0)
-            self.power += self.potion.get("effect").get("power", 0)
-            self.protection += self.potion.get("effect").get("protection", 0)
+            effect = self.potion.get("effect")
+            self.hp += effect.get("hp", 0)
+            self.power += effect.get("power", 0)
+            self.protection += effect.get("protection", 0)
 
     def prepare_for_battle(self) -> KnightForBattle:
         self.apply_armour()
