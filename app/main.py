@@ -65,7 +65,7 @@ KNIGHTS = {
         }
     },
     "red_knight": {
-        "name": "Red Knight",
+        "name": "Red knight",
         "power": 40,
         "hp": 70,
         "armour": [
