@@ -93,9 +93,17 @@ def battle(knights_config: dict) -> dict:
     knights_lst = [
         Knight.new_knight(knight) for knight in knights_config.values()
     ]
-    lancelot, arthur, mordred, red_knight = (
-        map(lambda knight: knight.prepare_for_battle(), knights_lst)
+
+    knights_prep = dict(
+        map(lambda knight: (
+            knight.name, knight.prepare_for_battle()
+        ), knights_lst)
     )
+
+    lancelot = knights_prep["Lancelot"]
+    arthur = knights_prep["Arthur"]
+    mordred = knights_prep["Mordred"]
+    red_knight = knights_prep["Red knight"]
 
     lancelot.battle_knight(mordred)
     mordred.battle_knight(lancelot)

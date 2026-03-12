@@ -36,10 +36,11 @@ class Knight:
 
     def apply_potion(self) -> None:
         if self.potion is not None:
-            effect = self.potion.get("effect")
-            self.battle_hp += effect.get("hp", 0)
-            self.battle_power += effect.get("power", 0)
-            self.battle_protection += effect.get("protection", 0)
+            effect = self.potion.get("effect", None)
+            if isinstance(effect, dict):
+                self.battle_hp += effect.get("hp", 0)
+                self.battle_power += effect.get("power", 0)
+                self.battle_protection += effect.get("protection", 0)
 
     def before_battle(self) -> None:
         self.battle_hp = self.hp
